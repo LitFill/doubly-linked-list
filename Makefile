@@ -1,5 +1,5 @@
 COMPILER := go
-BINNAME := dbl-link-go
+BINNAME := dbl
 
 BUILDCMD := $(COMPILER) build
 OUTPUT := -o $(BINNAME)
