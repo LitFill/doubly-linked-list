@@ -58,13 +58,23 @@ func (n *Node) Before() (node *Node, ok bool) {
 }
 
 func (n *Node) getHead() (head *Node) {
-	for bef, ok := n.Before(); ok; n = bef {
+	for {
+		bef, ok := n.Before()
+		if !ok {
+			break
+		}
+		n = bef
 	}
 	return n
 }
 
 func (n *Node) getTail() (tail *Node) {
-	for next, ok := n.Next(); ok; n = next {
+	for {
+		next, ok := n.Next()
+		if !ok {
+			break
+		}
+		n = next
 	}
 	return n
 }
@@ -127,15 +137,9 @@ func main() {
 	node := NewNodes(list)
 	node = node.getHead()
 	fmt.Println(node)
-	for {
-		n, ok := node.Next()
-		if ok {
-			fmt.Println(n)
-			node = n
-			continue
-		}
-		fmt.Println("END")
-		break
+	for n, ok := node.Next(); ok; n, ok = node.Next() {
+		fmt.Println(n)
+		node = n
 	}
 	for {
 		n, ok := node.Before()
