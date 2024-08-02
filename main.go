@@ -144,4 +144,8 @@ func main() {
 		break
 	}
 	fmt.Println(node, node.getTail())
+	fmt.Println(node.FindExact("to"))
+	fmt.Println(node.FindSubStr("re"))
+	fmt.Println(node.FindExact("re"))
+	fmt.Println(node.FindSubStr("Zoltraak"))
 }
