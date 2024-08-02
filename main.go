@@ -58,22 +58,14 @@ func (n *Node) Before() (node *Node, ok bool) {
 }
 
 func (n *Node) getHead() (head *Node) {
-	for {
-		bef, ok := n.Before()
-		if !ok {
-			break
-		}
+	for bef, ok := n.Before(); ok; bef, ok = n.Before() {
 		n = bef
 	}
 	return n
 }
 
 func (n *Node) getTail() (tail *Node) {
-	for {
-		next, ok := n.Next()
-		if !ok {
-			break
-		}
+	for next, ok := n.Next(); ok; next, ok = n.Next() {
 		n = next
 	}
 	return n
@@ -151,4 +143,5 @@ func main() {
 		fmt.Println("END")
 		break
 	}
+	fmt.Println(node, node.getTail())
 }
