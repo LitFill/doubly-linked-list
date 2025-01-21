@@ -33,12 +33,7 @@ func NewNodes(data []string) (head *Node) {
 }
 
 func (n *Node) String() string {
-	str := ""
-	str += fmt.Sprintf(`["%s"]`, n.data)
-	if n.next == nil {
-		str += "\n"
-	}
-	return str
+	return fmt.Sprintf(`["%s"]`, n.data)
 }
 
 func (n *Node) setNext(node *Node) {
