@@ -54,6 +54,22 @@ func (n *Node) Before() (node *Node, ok bool) {
 	return n.before, true
 }
 
+func (n *Node) Traverse(f func(*Node) *Node) {
+	for next, ok := n.Next(); ok; next, ok = n.Next() {
+		f(n)
+		n = next
+	}
+	f(n)
+}
+
+func (n *Node) TraverseBack(f func(*Node) *Node) {
+	for bef, ok := n.Before(); ok; bef, ok = n.Before() {
+		f(n)
+		n = bef
+	}
+	f(n)
+}
+
 func (n *Node) getHead() (head *Node) {
 	for bef, ok := n.Before(); ok; bef, ok = n.Before() {
 		n = bef
