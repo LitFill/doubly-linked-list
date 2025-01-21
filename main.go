@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+var ever = true
+
 type Node struct {
 	next, before *Node
 	data         string
@@ -85,18 +87,16 @@ func (n *Node) Delete() *Node {
 	if okb && okn {
 		before.setNext(next)
 	} else if okb {
-		before.next = nil
+		before.setNext(nil)
 	}
 	n = nil
-	if okn {
-		return next
-	}
-	return before // why choose before?
+	// return before // why choose before?
+	return before.getHead() // we return the head because it is the head
 }
 
 func (n *Node) FindExact(str string) (*Node, bool) {
 	head := n.getHead()
-	for {
+	for ever {
 		if head.data == str {
 			return head, true
 		}
@@ -111,7 +111,7 @@ func (n *Node) FindExact(str string) (*Node, bool) {
 
 func (n *Node) FindSubStr(str string) (*Node, bool) {
 	head := n.getHead()
-	for {
+	for ever {
 		if strings.Contains(head.data, str) {
 			return head, true
 		}
