@@ -139,22 +139,13 @@ func main() {
 	list := []string{"Hello", "World", "I", "am", "here", "to", "impress", "you"}
 	node := NewNodes(list)
 	node = node.getHead()
-	fmt.Println(node)
-	for n, ok := node.Next(); ok; n, ok = node.Next() {
-		fmt.Println(n)
-		node = n
-	}
-	for {
-		n, ok := node.Before()
-		if ok {
-			fmt.Println(n)
-			node = n
-			continue
-		}
-		fmt.Println("END")
-		break
-	}
-	fmt.Println(node, node.getTail())
+	node.Traverse(func(n *Node) *Node { fmt.Println(n); return nil })
+	fmt.Println()
+	node = node.getTail()
+	node.TraverseBack(func(n *Node) *Node { fmt.Println(n); return nil })
+	fmt.Println()
+	fmt.Println(node.getHead(), node.getTail())
+	fmt.Println()
 	fmt.Println(node.FindExact("to"))
 	fmt.Println(node.FindSubStr("re"))
 	fmt.Println(node.FindExact("re"))
